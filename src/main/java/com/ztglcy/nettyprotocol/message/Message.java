@@ -46,14 +46,12 @@ public class Message {
     public ByteBuffer encode(){
         int length = 4;
         byte[] bytes = SerializableHelper.encode(messageHeader);
-        MessageHeader a = SerializableHelper.decode(bytes,MessageHeader.class);
         if(bytes != null){
             length += bytes.length;
         }
         if(content!=null){
             length += content.length;
         }
-
 
         ByteBuffer byteBuffer = ByteBuffer.allocate(length + 4);
         byteBuffer.putInt(length);

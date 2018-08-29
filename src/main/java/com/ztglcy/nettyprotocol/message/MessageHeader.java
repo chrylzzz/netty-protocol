@@ -1,13 +1,11 @@
 package com.ztglcy.nettyprotocol.message;
 
-import java.io.Serializable;
-
 /**
  * @author Chenyu Li
  * @description
  * @date 2018/8/23
  */
-public class MessageHeader implements Serializable{
+public class MessageHeader{
 
     private int messageId;
     private int clientId;
