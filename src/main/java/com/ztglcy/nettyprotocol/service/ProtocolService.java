@@ -11,6 +11,4 @@ public interface ProtocolService {
 
     void shutdown();
 
-
-
 }

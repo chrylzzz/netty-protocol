@@ -28,5 +28,4 @@ public class ProtocolDecoder extends LengthFieldBasedFrameDecoder {
         return Message.decode(byteBuffer);
     }
 
-
 }
