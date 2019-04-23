@@ -21,7 +21,7 @@ public class NettyProtocolClient implements ProtocolService {
 
     private EventLoopGroup eventLoopGroup = new NioEventLoopGroup();
     private Bootstrap bootstrap = new Bootstrap();
-    private ConcurrentHashMap<Integer,Response> responseMap = new ConcurrentHashMap<>();
+    private ConcurrentHashMap<Integer, Response> responseMap = new ConcurrentHashMap<>();
 
     @Override
     public void start() {
@@ -43,11 +43,11 @@ public class NettyProtocolClient implements ProtocolService {
         eventLoopGroup.shutdownGracefully();
     }
 
-    public Message send(String address, Message message){
+    public Message send(String address, Message message) {
         try {
             Response response = new Response();
-            responseMap.put(message.getMessageHeader().getMessageId(),response);
-            Channel channel = bootstrap.connect(address,8888).sync().channel();
+            responseMap.put(message.getMessageHeader().getMessageId(), response);
+            Channel channel = bootstrap.connect(address, 8888).sync().channel();
 
             channel.writeAndFlush(message);
             Message responseMessage = response.waitResponse();
@@ -60,12 +60,13 @@ public class NettyProtocolClient implements ProtocolService {
         return null;
     }
 
-    public class ProtocolClientProcessor extends SimpleChannelInboundHandler<Message> {
+    //接收 服务端 数据
+    public class ProtocolClientProcessor extends SimpleChannelInboundHandler<Message> {//有泛型
 
         @Override
         protected void channelRead0(ChannelHandlerContext channelHandlerContext, Message message) throws Exception {
             Response response = responseMap.get(message.getMessageHeader().getMessageId());
-            if (response != null){
+            if (response != null) {
                 response.putResponse(message);
             }
         }

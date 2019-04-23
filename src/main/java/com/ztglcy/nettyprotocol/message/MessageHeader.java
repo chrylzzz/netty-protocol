@@ -5,14 +5,15 @@ package com.ztglcy.nettyprotocol.message;
  * @description
  * @date 2018/8/23
  */
-public class MessageHeader{
+public class MessageHeader {
 
     private int messageId;
     private int clientId;
     private int serverId;
     private int code;
 
-    private MessageHeader(){}
+    private MessageHeader() {
+    }
 
     public MessageHeader(int code) {
         this.code = code;
@@ -21,6 +22,11 @@ public class MessageHeader{
     public int getCode() {
         return code;
     }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
     public int getMessageId() {
         return messageId;
     }
@@ -43,10 +49,6 @@ public class MessageHeader{
 
     public void setServerId(int serverId) {
         this.serverId = serverId;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
     }
 
 }

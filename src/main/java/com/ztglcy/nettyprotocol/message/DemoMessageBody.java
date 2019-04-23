@@ -9,10 +9,12 @@ public class DemoMessageBody {
 
     private String demo;
 
+    //获得message
     public String getDemo() {
         return demo;
     }
 
+    //封装message
     public void setDemo(String demo) {
         this.demo = demo;
     }

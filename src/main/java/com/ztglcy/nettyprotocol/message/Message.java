@@ -16,24 +16,24 @@ public class Message {
 
     private byte[] content;
 
-    private Message(){
+    private Message() {
     }
 
-    public static Message createMessage(MessageHeader messageHeader){
+    public static Message createMessage(MessageHeader messageHeader) {
         Message message = new Message();
         message.messageHeader = messageHeader;
         return message;
     }
 
-    public static Message decode(ByteBuffer byteBuffer){
+    public static Message decode(ByteBuffer byteBuffer) {
         int length = byteBuffer.limit();
         int headerLength = byteBuffer.getInt();
 
         byte[] headerData = new byte[headerLength];
         byteBuffer.get(headerData);
-        MessageHeader messageHeader = SerializableHelper.decode(headerData,MessageHeader.class);
+        MessageHeader messageHeader = SerializableHelper.decode(headerData, MessageHeader.class);
 
-        byte[] content = new byte[length - headerLength -4];
+        byte[] content = new byte[length - headerLength - 4];
         byteBuffer.get(content);
 
         Message message = Message.createMessage(messageHeader);
@@ -42,33 +42,31 @@ public class Message {
     }
 
 
-
-    public ByteBuffer encode(){
+    public ByteBuffer encode() {
         int length = 4;
         byte[] bytes = SerializableHelper.encode(messageHeader);
-        if(bytes != null){
+        if (bytes != null) {
             length += bytes.length;
         }
-        if(content!=null){
+        if (content != null) {
             length += content.length;
         }
 
         ByteBuffer byteBuffer = ByteBuffer.allocate(length + 4);
         byteBuffer.putInt(length);
-        if(bytes != null){
+        if (bytes != null) {
             byteBuffer.putInt(bytes.length);
             byteBuffer.put(bytes);
-        }else{
+        } else {
             byteBuffer.putInt(0);
         }
-        if(content!=null){
+        if (content != null) {
             byteBuffer.put(content);
         }
         byteBuffer.flip();
 
         return byteBuffer;
     }
-
 
 
     public byte[] getContent() {

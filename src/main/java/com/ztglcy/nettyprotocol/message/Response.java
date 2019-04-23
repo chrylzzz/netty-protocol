@@ -11,12 +11,12 @@ public class Response {
     private Message message;
     private CountDownLatch countDownLatch = new CountDownLatch(1);
 
-    public void putResponse(Message message){
+    public void putResponse(Message message) {
         this.message = message;
         countDownLatch.countDown();
     }
 
-    public Message waitResponse() throws InterruptedException{
+    public Message waitResponse() throws InterruptedException {
         countDownLatch.await();
         return message;
     }
