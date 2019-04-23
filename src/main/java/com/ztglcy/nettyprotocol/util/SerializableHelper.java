@@ -16,6 +16,19 @@ public class SerializableHelper {
     //编码
     public static byte[] encode(Object object) {
         if (object != null) {
+            //第二个参数，是否格式化。
+            /**
+             * 格式化:
+             * {
+             *    {
+             *        ...
+             *    } ,
+             *    {
+             *        ...
+             *    }
+             * }
+             * 非格式化：{{...},{...}}
+             */
             return JSON.toJSONString(object, false).getBytes(Charset.forName("UTF-8"));
         }
         return null;
