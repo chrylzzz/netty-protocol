@@ -1,6 +1,7 @@
 package com.ztglcy.chr.protocol.prpcessor;
 
-import com.sdsoon.test2.netty.protocol.message.Message;
+
+import com.ztglcy.chr.protocol.message.Message;
 
 /**
  * //发送，接受 数据
